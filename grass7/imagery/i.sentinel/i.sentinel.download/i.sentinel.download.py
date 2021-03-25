@@ -292,7 +292,7 @@ def check_s2l1c_identifier(identifier, source='esa'):
 
 
 class SentinelDownloader(object):
-    def __init__(self, user, password, api_url='https://scihub.copernicus.eu/apihub'):
+    def __init__(self, user, password, api_url='https://scihub.copernicus.eu/dhus'):
 
         self._apiname = api_url
         self._user = user
@@ -303,7 +303,7 @@ class SentinelDownloader(object):
         root.addHandler(logging.StreamHandler(
             sys.stderr
         ))
-        if self._apiname == 'https://scihub.copernicus.eu/apihub':
+        if self._apiname == 'https://scihub.copernicus.eu/dhus':
             try:
                 from sentinelsat import SentinelAPI
             except ImportError as e:
@@ -721,9 +721,9 @@ def main():
     if options['settings'] == '-':
         # stdin
         import getpass
-        user = raw_input(_('Insert username: '))
+        user = input_(_('Insert username: '))
         password = getpass.getpass(_('Insert password: '))
-        url = raw_input(_('Insert API URL (leave empty for {}): ').format(api_url))
+        url = input_(_('Insert API URL (leave empty for {}): ').format(api_url))
         if url:
             api_url = url
     else:
